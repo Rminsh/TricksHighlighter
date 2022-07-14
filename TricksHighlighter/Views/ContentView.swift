@@ -6,10 +6,14 @@
 //
 
 import SwiftUI
+import CodeEditor
 
 struct ContentView: View {
     
-    @State var code: String = "//Lets begin here"
+    @State var source: String = "//Lets begin here"
+    @State var language: CodeEditor.Language = .swift
+    @State var theme: CodeEditor.ThemeName = .ocean
+    
     @State var windowController: WindowController = .mac
     @State var thumbnail: WindowThumbnailPreviewer = WindowThumbnailPreviewer(
         title: "Hello.swift",
@@ -18,34 +22,39 @@ struct ContentView: View {
         iconColor: .orange
     )
     
-    @State var backgroundColor: Color = Color(red: 29.0/255.0, green: 27.0/255.0, blue: 35.0/255.0)
-    @State var secondBackgroundColor: Color = Color(red: 43.0/255.0, green: 42.0/255.0, blue: 51.0/255.0)
-    @State var accentColor: Color = .clear
-    
-    init() {
-        #if os(iOS)
-        UITextView.appearance().backgroundColor = .clear
-        #endif
-    }
-    
     var body: some View {
         NavigationStack {
             VStack {
                 CodeWindowView(
-                    backgroundColor: $backgroundColor,
-                    backgroundSecondColor: $secondBackgroundColor,
-                    backgroundThirdColor: $accentColor,
+                    theme: $theme,
                     controller: $windowController,
                     thumbnail: $thumbnail
                 ){
-                    TextEditor(text: $code)
-                        .font(.system(.body, design: .monospaced))
-                        .foregroundColor(.white)
-                        .padding([.horizontal, .bottom])
+                    CodeEditor(
+                        source: $source,
+                        language: language,
+                        theme: theme,
+                        fontSize: .constant(CGFloat(16))
+                    )
+                    .padding([.horizontal, .bottom])
                 }
                 .frame(maxHeight: 350)
                 
                 Form {
+                    Section("Code") {
+                        Picker("Language", selection: $language) {
+                            ForEach(CodeEditor.availableLanguages) { language in
+                                Text("\(language.rawValue.capitalized)")
+                                    .tag(language)
+                            }
+                        }
+                        Picker("Theme", selection: $theme) {
+                            ForEach(CodeEditor.availableThemes, id: \.self) { theme in
+                                Text("\(theme.rawValue)")
+                                    .tag(theme)
+                            }
+                        }
+                    }
                     Section("Window Controller") {
                         Picker("Window Controls", selection: $windowController) {
                             ForEach(WindowController.allCases) { item in
@@ -55,12 +64,6 @@ struct ContentView: View {
                         }
                         
                         TextField("Preview name", text: $thumbnail.title)
-                    }
-                    
-                    Section("Theme") {
-                        ColorPicker("Background Color", selection: $backgroundColor)
-                        ColorPicker("Second Background Color", selection: $secondBackgroundColor)
-                        ColorPicker("Accent Color", selection: $accentColor)
                     }
                 }
                 .formStyle(.grouped)
@@ -74,14 +77,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-
-#if os(macOS)
-extension NSTextView {
-    open override var frame: CGRect {
-        didSet {
-            backgroundColor = .clear
-            drawsBackground = true
-        }
-    }
-}
-#endif

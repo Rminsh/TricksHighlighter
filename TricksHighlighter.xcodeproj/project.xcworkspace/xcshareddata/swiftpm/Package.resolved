@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "codeeditor",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Rminsh/CodeEditor",
+      "state" : {
+        "revision" : "e59cfe04d131df50f11d348f23b18088699f9f07",
+        "version" : "1.2.5"
+      }
+    },
+    {
+      "identity" : "highlightr",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/raspu/Highlightr",
+      "state" : {
+        "revision" : "93199b9e434f04bda956a613af8f571933f9f037",
+        "version" : "2.1.2"
+      }
+    }
+  ],
+  "version" : 2
+}

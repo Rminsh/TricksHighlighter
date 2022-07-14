@@ -17,6 +17,7 @@
 		C62B1E872874AEA00082D23D /* MacController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B1E862874AEA00082D23D /* MacController.swift */; };
 		C62B1E892874AECD0082D23D /* MSWindowsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B1E882874AECD0082D23D /* MSWindowsController.swift */; };
 		C62B1E8B2874AF1C0082D23D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B1E8A2874AF1C0082D23D /* WindowController.swift */; };
+		C6EFA52D2880A2D9006D1936 /* CodeEditor in Frameworks */ = {isa = PBXBuildFile; productRef = C6EFA52C2880A2D9006D1936 /* CodeEditor */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6EFA52D2880A2D9006D1936 /* CodeEditor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +130,7 @@
 			);
 			name = TricksHighlighter;
 			packageProductDependencies = (
+				C6EFA52C2880A2D9006D1936 /* CodeEditor */,
 			);
 			productName = TricksHighlighter;
 			productReference = C62B1E71287491320082D23D /* TricksHighlighter.app */;
@@ -158,6 +161,7 @@
 			);
 			mainGroup = C62B1E68287491320082D23D;
 			packageReferences = (
+				C6EFA52B2880A2D9006D1936 /* XCRemoteSwiftPackageReference "CodeEditor" */,
 			);
 			productRefGroup = C62B1E72287491320082D23D /* Products */;
 			projectDirPath = "";
@@ -396,6 +400,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C6EFA52B2880A2D9006D1936 /* XCRemoteSwiftPackageReference "CodeEditor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Rminsh/CodeEditor";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C6EFA52C2880A2D9006D1936 /* CodeEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C6EFA52B2880A2D9006D1936 /* XCRemoteSwiftPackageReference "CodeEditor" */;
+			productName = CodeEditor;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C62B1E69287491320082D23D /* Project object */;
 }

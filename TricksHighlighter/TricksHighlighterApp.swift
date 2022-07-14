@@ -13,6 +13,9 @@ struct TricksHighlighterApp: App {
         WindowGroup {
             ContentView()
         }
+        .commands {
+            TextFormattingCommands()
+        }
         #if os(macOS)
         .windowStyle(.hiddenTitleBar)
         .windowToolbarStyle(.unified)
