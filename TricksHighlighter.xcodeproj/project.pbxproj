@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C603DD552875602500AE3359 /* FileThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C603DD542875602500AE3359 /* FileThumbnail.swift */; };
+		C6047D89289666C100F7E5DB /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6047D88289666C100F7E5DB /* FileHelper.swift */; };
+		C6047D8C2896711000F7E5DB /* SnapshotCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6047D8B2896711000F7E5DB /* SnapshotCreator.swift */; };
 		C6270CA8287B424E0017301E /* KdeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6270CA7287B424E0017301E /* KdeController.swift */; };
 		C62B1E75287491320082D23D /* TricksHighlighterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B1E74287491320082D23D /* TricksHighlighterApp.swift */; };
 		C62B1E77287491320082D23D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B1E76287491320082D23D /* ContentView.swift */; };
@@ -17,11 +19,13 @@
 		C62B1E872874AEA00082D23D /* MacController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B1E862874AEA00082D23D /* MacController.swift */; };
 		C62B1E892874AECD0082D23D /* MSWindowsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B1E882874AECD0082D23D /* MSWindowsController.swift */; };
 		C62B1E8B2874AF1C0082D23D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B1E8A2874AF1C0082D23D /* WindowController.swift */; };
-		C6EFA52D2880A2D9006D1936 /* CodeEditor in Frameworks */ = {isa = PBXBuildFile; productRef = C6EFA52C2880A2D9006D1936 /* CodeEditor */; };
+		C6A9ED632956FA2D0025CE08 /* CodeEditor in Frameworks */ = {isa = PBXBuildFile; productRef = C6A9ED622956FA2D0025CE08 /* CodeEditor */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C603DD542875602500AE3359 /* FileThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileThumbnail.swift; sourceTree = "<group>"; };
+		C6047D88289666C100F7E5DB /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
+		C6047D8B2896711000F7E5DB /* SnapshotCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotCreator.swift; sourceTree = "<group>"; };
 		C6270CA7287B424E0017301E /* KdeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KdeController.swift; sourceTree = "<group>"; };
 		C62B1E71287491320082D23D /* TricksHighlighter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TricksHighlighter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C62B1E74287491320082D23D /* TricksHighlighterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksHighlighterApp.swift; sourceTree = "<group>"; };
@@ -40,13 +44,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6EFA52D2880A2D9006D1936 /* CodeEditor in Frameworks */,
+				C6A9ED632956FA2D0025CE08 /* CodeEditor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C6047D8A289670FC00F7E5DB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C6047D88289666C100F7E5DB /* FileHelper.swift */,
+				C6047D8B2896711000F7E5DB /* SnapshotCreator.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		C62B1E68287491320082D23D = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +79,7 @@
 		C62B1E73287491320082D23D /* TricksHighlighter */ = {
 			isa = PBXGroup;
 			children = (
+				C6047D8A289670FC00F7E5DB /* Components */,
 				C62B1E7B287491320082D23D /* Preview Content */,
 				C69B27F4287AB770004C5EA8 /* Resources */,
 				C69B27F5287AB7DA004C5EA8 /* Views */,
@@ -130,7 +144,7 @@
 			);
 			name = TricksHighlighter;
 			packageProductDependencies = (
-				C6EFA52C2880A2D9006D1936 /* CodeEditor */,
+				C6A9ED622956FA2D0025CE08 /* CodeEditor */,
 			);
 			productName = TricksHighlighter;
 			productReference = C62B1E71287491320082D23D /* TricksHighlighter.app */;
@@ -144,7 +158,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1400;
-				LastUpgradeCheck = 1400;
+				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					C62B1E70287491320082D23D = {
 						CreatedOnToolsVersion = 14.0;
@@ -161,7 +175,7 @@
 			);
 			mainGroup = C62B1E68287491320082D23D;
 			packageReferences = (
-				C6EFA52B2880A2D9006D1936 /* XCRemoteSwiftPackageReference "CodeEditor" */,
+				C6A9ED612956FA2D0025CE08 /* XCRemoteSwiftPackageReference "CodeEditor" */,
 			);
 			productRefGroup = C62B1E72287491320082D23D /* Products */;
 			projectDirPath = "";
@@ -191,11 +205,13 @@
 			files = (
 				C62B1E77287491320082D23D /* ContentView.swift in Sources */,
 				C62B1E8B2874AF1C0082D23D /* WindowController.swift in Sources */,
+				C6047D89289666C100F7E5DB /* FileHelper.swift in Sources */,
 				C603DD552875602500AE3359 /* FileThumbnail.swift in Sources */,
 				C62B1E8428749D690082D23D /* CodeWindowView.swift in Sources */,
 				C62B1E892874AECD0082D23D /* MSWindowsController.swift in Sources */,
 				C62B1E75287491320082D23D /* TricksHighlighterApp.swift in Sources */,
 				C6270CA8287B424E0017301E /* KdeController.swift in Sources */,
+				C6047D8C2896711000F7E5DB /* SnapshotCreator.swift in Sources */,
 				C62B1E872874AEA00082D23D /* MacController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,6 +252,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -294,6 +311,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -318,8 +336,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TricksHighlighter/Resources/TricksHighlighter.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"TricksHighlighter/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
@@ -351,8 +371,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TricksHighlighter/Resources/TricksHighlighter.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"TricksHighlighter/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
@@ -402,20 +424,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C6EFA52B2880A2D9006D1936 /* XCRemoteSwiftPackageReference "CodeEditor" */ = {
+		C6A9ED612956FA2D0025CE08 /* XCRemoteSwiftPackageReference "CodeEditor" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Rminsh/CodeEditor";
+			repositoryURL = "https://github.com/ZeeZide/CodeEditor.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.5;
+				branch = main;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C6EFA52C2880A2D9006D1936 /* CodeEditor */ = {
+		C6A9ED622956FA2D0025CE08 /* CodeEditor */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C6EFA52B2880A2D9006D1936 /* XCRemoteSwiftPackageReference "CodeEditor" */;
+			package = C6A9ED612956FA2D0025CE08 /* XCRemoteSwiftPackageReference "CodeEditor" */;
 			productName = CodeEditor;
 		};
 /* End XCSwiftPackageProductDependency section */

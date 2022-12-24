@@ -3,10 +3,10 @@
     {
       "identity" : "codeeditor",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Rminsh/CodeEditor",
+      "location" : "https://github.com/ZeeZide/CodeEditor.git",
       "state" : {
-        "revision" : "e59cfe04d131df50f11d348f23b18088699f9f07",
-        "version" : "1.2.5"
+        "branch" : "main",
+        "revision" : "180bde07b44dea839b32873bd8586ba146fa9106"
       }
     },
     {

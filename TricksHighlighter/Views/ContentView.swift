@@ -25,20 +25,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                CodeWindowView(
-                    theme: $theme,
-                    controller: $windowController,
-                    thumbnail: $thumbnail
-                ){
-                    CodeEditor(
-                        source: $source,
-                        language: language,
-                        theme: theme,
-                        fontSize: .constant(CGFloat(16))
-                    )
-                    .padding([.horizontal, .bottom])
-                }
-                .frame(maxHeight: 350)
+                codeWindow
                 
                 Form {
                     Section("Code") {
@@ -68,7 +55,51 @@ struct ContentView: View {
                 }
                 .formStyle(.grouped)
             }
+            .toolbar {
+                ToolbarItem {
+                    Button(action: {
+                        saveCodeSnapshot()
+                    }) {
+                        Label("Save", systemImage: "square.and.arrow.down")
+                    }
+                }
+            }
         }
+    }
+}
+
+extension ContentView {
+    var codeWindow: some View {
+        CodeWindowView(
+            theme: $theme,
+            controller: $windowController,
+            thumbnail: $thumbnail
+        ){
+            CodeEditor(
+                source: $source,
+                language: language,
+                theme: theme,
+                fontSize: .constant(CGFloat(16))
+            )
+            .padding([.horizontal, .bottom])
+        }
+        .frame(maxHeight: 350)
+    }
+    
+    func getSnapshot() -> NSImage? {
+        let view = codeWindow.frame(width: 450, height: 300)
+        return view.renderAsImage()
+    }
+    
+    func saveCodeSnapshot() {
+        #if os(macOS)
+        if let url = FileHelper.shared.showSavePanel() {
+            FileHelper.shared.savePNG(
+                image: getSnapshot(),
+                path: url
+            )
+        }
+        #endif
     }
 }
 
