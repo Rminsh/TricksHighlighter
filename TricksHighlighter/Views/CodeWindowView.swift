@@ -83,7 +83,8 @@ struct CodeWindowView<Content: View>: View {
                 }
             }
             .padding(.horizontal, 12)
-            .padding(.vertical, 5)
+            .padding(.top, 5)
+            .dynamicTypeSize(.small)
             
             content()
         }

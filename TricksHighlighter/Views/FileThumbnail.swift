@@ -20,7 +20,6 @@ struct FileThumbnail: View {
         return highlighter?.theme.themeBackgroundColor ?? .black
     }
     
-    
     var body: some View {
         HStack {
             Image(systemName: thumbnail.icon)
@@ -31,11 +30,7 @@ struct FileThumbnail: View {
         }
         .padding(.horizontal)
         .padding(.vertical, 8)
-        #if os(iOS)
-        .background(Color(uiColor: backgroundColor).contrast(0.8))
-        #elseif os(macOS)
-        .background(Color(nsColor: backgroundColor).contrast(0.8))
-        #endif
+        .background(backgroundColor.isLight() ? .black.opacity(0.075) : .white.opacity(0.15))
         .mask(RoundedRectangle(cornerRadius: 5, style: .continuous))
     }
 }
