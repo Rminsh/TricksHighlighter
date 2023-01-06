@@ -88,12 +88,11 @@ struct CodeWindowView<Content: View>: View {
             
             content()
         }
-        
         .background(backgroundColor)
         .mask(RoundedRectangle(cornerRadius: 12, style: .continuous))
         .shadow(color: backgroundColor.opacity(0.8), radius: 5)
         .shadow(color: .gray,radius: 0.5)
-        .padding()
+        .padding(.all, 8)
     }
 }
 

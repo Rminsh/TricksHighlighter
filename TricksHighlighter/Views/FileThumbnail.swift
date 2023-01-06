@@ -25,9 +25,14 @@ struct FileThumbnail: View {
             Image(systemName: thumbnail.icon)
                 .foregroundColor(thumbnail.iconColor)
             
-            Text(thumbnail.title)
+            TextField("", text: $thumbnail.title)
                 .foregroundColor(backgroundColor.isLight() ? .black : .white)
+                .fixedSize()
+                .autocorrectionDisabled()
+                .textFieldStyle(.plain)
+                .border(.clear)
         }
+        .font(.caption)
         .padding(.horizontal)
         .padding(.vertical, 8)
         .background(backgroundColor.isLight() ? .black.opacity(0.075) : .white.opacity(0.15))

@@ -23,71 +23,119 @@ struct ContentView: View {
         iconColor: .orange
     )
     
+    @State var width: CGFloat = .zero
+    @State var height: CGFloat = 300
+    
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    #endif
+    
     var body: some View {
         NavigationStack {
-            content
-        }
-    }
-    
-    var content: some View {
-        VStack {
-            codeWindow
-            
-            Form {
-                Section("Code") {
-                    Picker("Language", selection: $language) {
-                        ForEach(CodeEditor.availableLanguages) { language in
-                            Text("\(language.rawValue.capitalized)")
-                                .tag(language)
-                        }
-                    }
-                    Picker("Theme", selection: $theme) {
-                        ForEach(CodeEditor.availableThemes, id: \.self) { theme in
-                            Text("\(theme.rawValue)")
-                                .tag(theme)
-                        }
-                    }
-                }
-                Section("Window Controller") {
-                    Picker("Window Controls", selection: $windowController) {
-                        ForEach(WindowController.allCases) { item in
-                            Text(item.name)
-                                .tag(item)
-                        }
-                    }
-                    
-                    TextField("Preview name", text: $thumbnail.title)
-                }
+            ZStack {
+                codeWindow
             }
-            .formStyle(.grouped)
-        }
-        .toolbar {
-            ToolbarItem {
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
                 Button(action: {
                     saveCodeSnapshot()
                 }) {
                     Label("Save", systemImage: "square.and.arrow.down")
                 }
             }
+            
+                ToolbarItemGroup(placement: .secondaryAction) {
+                    /// Language
+                    Picker(selection: $language) {
+                        ForEach(CodeEditor.availableLanguages) { language in
+                            Text("\(language.rawValue.capitalized)")
+                                .tag(language)
+                        }
+                    } label: {
+                        Label("Language", systemImage: "command")
+                    }
+                    
+                    /// Theme
+                    Picker(selection: $theme) {
+                        ForEach(CodeEditor.availableThemes, id: \.self) { theme in
+                            Text("\(theme.rawValue)")
+                                .tag(theme)
+                        }
+                    } label: {
+                        Label("Theme", systemImage: "paintbrush.fill")
+                    }
+                    
+                    /// Window Controller
+                    Picker(selection: $windowController) {
+                        ForEach(WindowController.allCases) { item in
+                            Text(item.name)
+                                .tag(item)
+                        }
+                    } label: {
+                        Label("Window Controls", systemImage: "macwindow")
+                            .labelStyle(.iconOnly)
+                    }
+                }
+        }
         }
     }
 }
 
 extension ContentView {
     var codeWindow: some View {
-        CodeWindowView(
-            theme: $theme,
-            controller: $windowController,
-            thumbnail: $thumbnail
-        ){
-            CodeEditor(
-                source: $source,
-                language: language,
-                theme: theme,
-                fontSize: .constant(CGFloat(14.1))
-            )
-            .padding(.bottom)
+        GeometryReader { proxy in
+            Group {
+                CodeWindowView(
+                    theme: $theme,
+                    controller: $windowController,
+                    thumbnail: $thumbnail
+                ){
+                    CodeEditor(
+                        source: $source,
+                        language: language,
+                        theme: theme,
+                        fontSize: .constant(CGFloat(14.1))
+                    )
+                    .padding(.bottom)
+                }
+                .frame(minWidth: width, maxWidth: width, minHeight: height, maxHeight: height)
+                .overlay(alignment: .bottomTrailing) {
+                    RoundedRectangle(cornerRadius: 10)
+                        .trim(from: 0.05, to: 0.20)
+                        .stroke(lineWidth: 4)
+                        .foregroundColor(.gray)
+                        .shadow(radius: 5)
+                        .frame(width: 50, height: 50)
+                        .padding(.all, 13)
+                        .background(Color.white.opacity(0.001))
+                        .gesture(
+                            DragGesture()
+                                .onChanged { value in
+                                    #if os(iOS)
+                                    if horizontalSizeClass == .compact {
+                                        width = min(max(250, width + value.translation.width), proxy.size.width)
+                                    } else {
+                                        width = max(250, width + value.translation.width)
+                                    }
+                                    #elseif os(macOS)
+                                    width = max(250, width + value.translation.width)
+                                    #endif
+                                    height = max(250, height + value.translation.height)
+                                }
+                        )
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .task {
+                width = 350
+                #if os(iOS)
+                if horizontalSizeClass == .compact {
+                    width = proxy.size.width
+                }
+                #endif
+            }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     func codeWindowPreview() -> any View {
@@ -95,16 +143,22 @@ extension ContentView {
         highlightr?.setTheme(to: theme.rawValue)
         let highlightedCode = highlightr?.highlight(source, as: language.rawValue)
         
-        return CodeWindowView(
+        let view = CodeWindowView(
             theme: $theme,
             controller: $windowController,
             thumbnail: $thumbnail
         ){
             Text(AttributedString(highlightedCode ?? NSAttributedString(string: "")))
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding([.horizontal, .bottom])
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .padding([.horizontal, .vertical])
         }
-        .frame(width: 512, height: 512)
+        .edgesIgnoringSafeArea(.all)
+        .frame(width: width, height: height, alignment: .center)
+        #if os(iOS)
+        .padding(.bottom, 24)
+        #endif
+
+        return view
     }
 }
     
