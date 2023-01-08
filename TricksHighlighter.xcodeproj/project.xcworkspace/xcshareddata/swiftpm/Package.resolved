@@ -3,19 +3,19 @@
     {
       "identity" : "codeeditor",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ZeeZide/CodeEditor.git",
+      "location" : "https://github.com/TricksSwift/CodeEditor",
       "state" : {
-        "branch" : "main",
-        "revision" : "180bde07b44dea839b32873bd8586ba146fa9106"
+        "revision" : "0de8c127626f9b7408c7c5981c54c1a8d51301da",
+        "version" : "0.0.1"
       }
     },
     {
-      "identity" : "highlightr",
+      "identity" : "highlighter",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/raspu/Highlightr",
+      "location" : "https://github.com/TricksSwift/Highlighter",
       "state" : {
-        "revision" : "93199b9e434f04bda956a613af8f571933f9f037",
-        "version" : "2.1.2"
+        "revision" : "72da01ec049e58e725fe3befd92535203c13de05",
+        "version" : "0.0.2"
       }
     }
   ],

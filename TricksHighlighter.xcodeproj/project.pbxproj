@@ -19,7 +19,8 @@
 		C62B1E872874AEA00082D23D /* MacController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B1E862874AEA00082D23D /* MacController.swift */; };
 		C62B1E892874AECD0082D23D /* MSWindowsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B1E882874AECD0082D23D /* MSWindowsController.swift */; };
 		C62B1E8B2874AF1C0082D23D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B1E8A2874AF1C0082D23D /* WindowController.swift */; };
-		C6A9ED632956FA2D0025CE08 /* CodeEditor in Frameworks */ = {isa = PBXBuildFile; productRef = C6A9ED622956FA2D0025CE08 /* CodeEditor */; };
+		C6681FF4296ABAF2007D3998 /* VisualEffectBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6681FF3296ABAF2007D3998 /* VisualEffectBlur.swift */; };
+		C6D08C60296AEB8900545C32 /* CodeEditor in Frameworks */ = {isa = PBXBuildFile; productRef = C6D08C5F296AEB8900545C32 /* CodeEditor */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		C62B1E862874AEA00082D23D /* MacController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacController.swift; sourceTree = "<group>"; };
 		C62B1E882874AECD0082D23D /* MSWindowsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSWindowsController.swift; sourceTree = "<group>"; };
 		C62B1E8A2874AF1C0082D23D /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
+		C6681FF3296ABAF2007D3998 /* VisualEffectBlur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectBlur.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6A9ED632956FA2D0025CE08 /* CodeEditor in Frameworks */,
+				C6D08C60296AEB8900545C32 /* CodeEditor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +56,7 @@
 		C6047D8A289670FC00F7E5DB /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C6681FF3296ABAF2007D3998 /* VisualEffectBlur.swift */,
 				C6047D88289666C100F7E5DB /* FileHelper.swift */,
 				C6047D8B2896711000F7E5DB /* SnapshotCreator.swift */,
 			);
@@ -144,7 +147,7 @@
 			);
 			name = TricksHighlighter;
 			packageProductDependencies = (
-				C6A9ED622956FA2D0025CE08 /* CodeEditor */,
+				C6D08C5F296AEB8900545C32 /* CodeEditor */,
 			);
 			productName = TricksHighlighter;
 			productReference = C62B1E71287491320082D23D /* TricksHighlighter.app */;
@@ -175,7 +178,7 @@
 			);
 			mainGroup = C62B1E68287491320082D23D;
 			packageReferences = (
-				C6A9ED612956FA2D0025CE08 /* XCRemoteSwiftPackageReference "CodeEditor" */,
+				C6D08C5E296AEB8900545C32 /* XCRemoteSwiftPackageReference "CodeEditor" */,
 			);
 			productRefGroup = C62B1E72287491320082D23D /* Products */;
 			projectDirPath = "";
@@ -205,6 +208,7 @@
 			files = (
 				C62B1E77287491320082D23D /* ContentView.swift in Sources */,
 				C62B1E8B2874AF1C0082D23D /* WindowController.swift in Sources */,
+				C6681FF4296ABAF2007D3998 /* VisualEffectBlur.swift in Sources */,
 				C6047D89289666C100F7E5DB /* FileHelper.swift in Sources */,
 				C603DD552875602500AE3359 /* FileThumbnail.swift in Sources */,
 				C62B1E8428749D690082D23D /* CodeWindowView.swift in Sources */,
@@ -426,20 +430,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C6A9ED612956FA2D0025CE08 /* XCRemoteSwiftPackageReference "CodeEditor" */ = {
+		C6D08C5E296AEB8900545C32 /* XCRemoteSwiftPackageReference "CodeEditor" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ZeeZide/CodeEditor.git";
+			repositoryURL = "https://github.com/TricksSwift/CodeEditor";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C6A9ED622956FA2D0025CE08 /* CodeEditor */ = {
+		C6D08C5F296AEB8900545C32 /* CodeEditor */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C6A9ED612956FA2D0025CE08 /* XCRemoteSwiftPackageReference "CodeEditor" */;
+			package = C6D08C5E296AEB8900545C32 /* XCRemoteSwiftPackageReference "CodeEditor" */;
 			productName = CodeEditor;
 		};
 /* End XCSwiftPackageProductDependency section */

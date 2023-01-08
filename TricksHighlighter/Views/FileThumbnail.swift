@@ -7,7 +7,7 @@
 
 import SwiftUI
 import CodeEditor
-import Highlightr
+import Highlighter
 
 struct FileThumbnail: View {
     
