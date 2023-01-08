@@ -24,7 +24,7 @@ struct ContentView: View {
     )
     
     @State var width: CGFloat = .zero
-    @State var height: CGFloat = 300
+    @State var height: CGFloat = 400
     
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
@@ -36,7 +36,16 @@ struct ContentView: View {
             content
         }
         #elseif os(macOS)
-        content
+        ZStack {
+            /// Background
+            VisualEffectBlur(
+                material: .popover,
+                blendingMode: .behindWindow
+            )
+            .edgesIgnoringSafeArea(.all)
+            
+            content
+        }
         #endif
     }
     
@@ -148,7 +157,7 @@ extension ContentView {
             }
             .frame(maxWidth: .infinity)
             .task {
-                width = 350
+                width = 450
                 #if os(iOS)
                 if horizontalSizeClass == .compact {
                     width = proxy.size.width
