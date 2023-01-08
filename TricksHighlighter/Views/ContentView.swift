@@ -84,7 +84,7 @@ struct ContentView: View {
 extension ContentView {
     var codeWindow: some View {
         GeometryReader { proxy in
-            Group {
+            ZStack {
                 CodeWindowView(
                     theme: $theme,
                     controller: $windowController,
@@ -98,7 +98,6 @@ extension ContentView {
                     )
                     .padding(.bottom)
                 }
-                .frame(minWidth: width, maxWidth: width, minHeight: height, maxHeight: height)
                 .overlay(alignment: .bottomTrailing) {
                     RoundedRectangle(cornerRadius: 10)
                         .trim(from: 0.05, to: 0.20)
@@ -111,19 +110,33 @@ extension ContentView {
                         .gesture(
                             DragGesture()
                                 .onChanged { value in
-                                    #if os(iOS)
-                                    if horizontalSizeClass == .compact {
-                                        width = min(max(250, width + value.translation.width), proxy.size.width)
-                                    } else {
-                                        width = max(250, width + value.translation.width)
+                                    DispatchQueue.main.async {
+                                        #if os(iOS)
+                                        if horizontalSizeClass == .compact {
+                                            height = height + value.translation.height
+                                        } else {
+                                            width = width + value.translation.width
+                                            height = height + value.translation.height
+                                        }
+                                        #elseif os(macOS)
+                                        width = width + value.translation.width
+                                        height = height + value.translation.height
+                                        #endif
                                     }
-                                    #elseif os(macOS)
-                                    width = max(250, width + value.translation.width)
-                                    #endif
-                                    height = max(250, height + value.translation.height)
+                                }
+                                .onEnded { value in
+                                    DispatchQueue.main.async {
+                                        width = min(width, proxy.size.width)
+                                        height = min(height, proxy.size.height)
+                                    }
                                 }
                         )
                 }
+                .frame(
+                    width: max(250, width),
+                    height: max(250, height),
+                    alignment: .center
+                )
             }
             .frame(maxWidth: .infinity)
             .task {
