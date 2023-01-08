@@ -1,21 +1,12 @@
 {
   "pins" : [
     {
-      "identity" : "codeeditor",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/TricksSwift/CodeEditor",
-      "state" : {
-        "revision" : "0de8c127626f9b7408c7c5981c54c1a8d51301da",
-        "version" : "0.0.1"
-      }
-    },
-    {
       "identity" : "highlighter",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/TricksSwift/Highlighter",
+      "location" : "https://github.com/Rminsh/Highlighter",
       "state" : {
-        "revision" : "72da01ec049e58e725fe3befd92535203c13de05",
-        "version" : "0.0.2"
+        "branch" : "master",
+        "revision" : "6c2a6743c2728dee61e8587e929c5ab3f49ce9f5"
       }
     }
   ],

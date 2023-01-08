@@ -20,7 +20,7 @@
 		C62B1E892874AECD0082D23D /* MSWindowsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B1E882874AECD0082D23D /* MSWindowsController.swift */; };
 		C62B1E8B2874AF1C0082D23D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B1E8A2874AF1C0082D23D /* WindowController.swift */; };
 		C6681FF4296ABAF2007D3998 /* VisualEffectBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6681FF3296ABAF2007D3998 /* VisualEffectBlur.swift */; };
-		C6D08C60296AEB8900545C32 /* CodeEditor in Frameworks */ = {isa = PBXBuildFile; productRef = C6D08C5F296AEB8900545C32 /* CodeEditor */; };
+		C684C6A9296B4E9300F9D887 /* Highlighter in Frameworks */ = {isa = PBXBuildFile; productRef = C684C6A8296B4E9300F9D887 /* Highlighter */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6D08C60296AEB8900545C32 /* CodeEditor in Frameworks */,
+				C684C6A9296B4E9300F9D887 /* Highlighter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +68,7 @@
 			children = (
 				C62B1E73287491320082D23D /* TricksHighlighter */,
 				C62B1E72287491320082D23D /* Products */,
+				C6445376296B158E00328D54 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -111,6 +112,13 @@
 			path = WindowControllers;
 			sourceTree = "<group>";
 		};
+		C6445376296B158E00328D54 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C69B27F4287AB770004C5EA8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,7 +155,7 @@
 			);
 			name = TricksHighlighter;
 			packageProductDependencies = (
-				C6D08C5F296AEB8900545C32 /* CodeEditor */,
+				C684C6A8296B4E9300F9D887 /* Highlighter */,
 			);
 			productName = TricksHighlighter;
 			productReference = C62B1E71287491320082D23D /* TricksHighlighter.app */;
@@ -178,7 +186,7 @@
 			);
 			mainGroup = C62B1E68287491320082D23D;
 			packageReferences = (
-				C6D08C5E296AEB8900545C32 /* XCRemoteSwiftPackageReference "CodeEditor" */,
+				C684C6A7296B4E9300F9D887 /* XCRemoteSwiftPackageReference "Highlighter" */,
 			);
 			productRefGroup = C62B1E72287491320082D23D /* Products */;
 			projectDirPath = "";
@@ -430,21 +438,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C6D08C5E296AEB8900545C32 /* XCRemoteSwiftPackageReference "CodeEditor" */ = {
+		C684C6A7296B4E9300F9D887 /* XCRemoteSwiftPackageReference "Highlighter" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/TricksSwift/CodeEditor";
+			repositoryURL = "https://github.com/Rminsh/Highlighter";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.1;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C6D08C5F296AEB8900545C32 /* CodeEditor */ = {
+		C684C6A8296B4E9300F9D887 /* Highlighter */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C6D08C5E296AEB8900545C32 /* XCRemoteSwiftPackageReference "CodeEditor" */;
-			productName = CodeEditor;
+			package = C684C6A7296B4E9300F9D887 /* XCRemoteSwiftPackageReference "Highlighter" */;
+			productName = Highlighter;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

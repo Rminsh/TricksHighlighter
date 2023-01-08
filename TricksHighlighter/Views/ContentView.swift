@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Highlighter
-import CodeEditor
 
 struct ContentView: View {
     
