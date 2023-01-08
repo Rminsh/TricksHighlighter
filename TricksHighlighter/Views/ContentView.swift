@@ -31,53 +31,61 @@ struct ContentView: View {
     #endif
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                codeWindow
+        #if os(iOS)
+        NavigationView {
+            content
+        }
+        #elseif os(macOS)
+        content
+        #endif
+    }
+    
+    var content: some View {
+        ZStack {
+            codeWindow
+        }
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+            Button(action: {
+                saveCodeSnapshot()
+            }) {
+                Label("Save", systemImage: "square.and.arrow.down")
             }
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                Button(action: {
-                    saveCodeSnapshot()
-                }) {
-                    Label("Save", systemImage: "square.and.arrow.down")
+        }
+        
+            ToolbarItemGroup(placement: .automatic) {
+                /// Language
+                Picker(selection: $language) {
+                    ForEach(CodeEditor.availableLanguages) { language in
+                        Text("\(language.rawValue.capitalized)")
+                            .tag(language)
+                    }
+                } label: {
+                    Label("Language", systemImage: "command")
+                }
+                
+                /// Theme
+                Picker(selection: $theme) {
+                    ForEach(CodeEditor.availableThemes, id: \.self) { theme in
+                        Text("\(theme.rawValue)")
+                            .tag(theme)
+                    }
+                } label: {
+                    Label("Theme", systemImage: "paintbrush.fill")
+                }
+                
+                /// Window Controller
+                Picker(selection: $windowController) {
+                    ForEach(WindowController.allCases) { item in
+                        Text(item.name)
+                            .tag(item)
+                    }
+                } label: {
+                    Label("Window Controls", systemImage: "macwindow")
+                        .labelStyle(.iconOnly)
                 }
             }
-            
-                ToolbarItemGroup(placement: .secondaryAction) {
-                    /// Language
-                    Picker(selection: $language) {
-                        ForEach(CodeEditor.availableLanguages) { language in
-                            Text("\(language.rawValue.capitalized)")
-                                .tag(language)
-                        }
-                    } label: {
-                        Label("Language", systemImage: "command")
-                    }
-                    
-                    /// Theme
-                    Picker(selection: $theme) {
-                        ForEach(CodeEditor.availableThemes, id: \.self) { theme in
-                            Text("\(theme.rawValue)")
-                                .tag(theme)
-                        }
-                    } label: {
-                        Label("Theme", systemImage: "paintbrush.fill")
-                    }
-                    
-                    /// Window Controller
-                    Picker(selection: $windowController) {
-                        ForEach(WindowController.allCases) { item in
-                            Text(item.name)
-                                .tag(item)
-                        }
-                    } label: {
-                        Label("Window Controls", systemImage: "macwindow")
-                            .labelStyle(.iconOnly)
-                    }
-                }
-        }
-        }
+    }
     }
 }
 
