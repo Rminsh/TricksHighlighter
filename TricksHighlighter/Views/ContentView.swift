@@ -55,12 +55,12 @@ struct ContentView: View {
         }
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
-            Button(action: {
-                saveCodeSnapshot()
-            }) {
-                Label("Save", systemImage: "square.and.arrow.down")
+                Button(action: {
+                    saveCodeSnapshot()
+                }) {
+                    Label("Save", systemImage: "square.and.arrow.down")
+                }
             }
-        }
         
             ToolbarItemGroup(placement: .automatic) {
                 /// Language
@@ -94,7 +94,7 @@ struct ContentView: View {
                         .labelStyle(.iconOnly)
                 }
             }
-    }
+        }
     }
 }
 
