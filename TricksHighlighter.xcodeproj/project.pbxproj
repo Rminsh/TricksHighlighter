@@ -21,6 +21,7 @@
 		C62B1E8B2874AF1C0082D23D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B1E8A2874AF1C0082D23D /* WindowController.swift */; };
 		C6681FF4296ABAF2007D3998 /* VisualEffectBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6681FF3296ABAF2007D3998 /* VisualEffectBlur.swift */; };
 		C684C6A9296B4E9300F9D887 /* Highlighter in Frameworks */ = {isa = PBXBuildFile; productRef = C684C6A8296B4E9300F9D887 /* Highlighter */; };
+		C6EA054F296CA59000FC9568 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EA054E296CA59000FC9568 /* BottomSheetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		C62B1E882874AECD0082D23D /* MSWindowsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSWindowsController.swift; sourceTree = "<group>"; };
 		C62B1E8A2874AF1C0082D23D /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		C6681FF3296ABAF2007D3998 /* VisualEffectBlur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectBlur.swift; sourceTree = "<group>"; };
+		C6EA054E296CA59000FC9568 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,9 +58,10 @@
 		C6047D8A289670FC00F7E5DB /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				C6681FF3296ABAF2007D3998 /* VisualEffectBlur.swift */,
+				C6EA054E296CA59000FC9568 /* BottomSheetView.swift */,
 				C6047D88289666C100F7E5DB /* FileHelper.swift */,
 				C6047D8B2896711000F7E5DB /* SnapshotCreator.swift */,
+				C6681FF3296ABAF2007D3998 /* VisualEffectBlur.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				C6681FF4296ABAF2007D3998 /* VisualEffectBlur.swift in Sources */,
 				C6047D89289666C100F7E5DB /* FileHelper.swift in Sources */,
 				C603DD552875602500AE3359 /* FileThumbnail.swift in Sources */,
+				C6EA054F296CA59000FC9568 /* BottomSheetView.swift in Sources */,
 				C62B1E8428749D690082D23D /* CodeWindowView.swift in Sources */,
 				C62B1E892874AECD0082D23D /* MSWindowsController.swift in Sources */,
 				C62B1E75287491320082D23D /* TricksHighlighterApp.swift in Sources */,

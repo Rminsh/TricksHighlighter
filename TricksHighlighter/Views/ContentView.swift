@@ -22,8 +22,10 @@ struct ContentView: View {
         iconColor: .orange
     )
     
-    @State var width: CGFloat = .zero
-    @State var height: CGFloat = 400
+    @State private var toggleTools: Bool = true
+    
+    @State private var width: CGFloat = .zero
+    @State private var height: CGFloat = 400
     
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
@@ -32,7 +34,12 @@ struct ContentView: View {
     var body: some View {
         #if os(iOS)
         NavigationView {
-            content
+            ZStack {
+                Color("BackgroundColor")
+                    .edgesIgnoringSafeArea(.all)
+                
+                content
+            }
         }
         #elseif os(macOS)
         ZStack {
@@ -49,9 +56,27 @@ struct ContentView: View {
     }
     
     var content: some View {
-        ZStack {
+        ZStack(alignment: .bottom) {
             codeWindow
+            
+            #if os(iOS)
+            if toggleTools {
+                BottomSheetView(
+                    isOpen: $toggleTools,
+                    maxHeight: 300
+                ) {
+                    Form {
+                        Section(header: Text("Code window config")) {
+                            tools
+                        }
+                    }
+                }
+                .transition(.move(edge: .bottom))
+                .animation(.easeIn, value: toggleTools)
+            }
+            #endif
         }
+        .edgesIgnoringSafeArea(.bottom)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {
@@ -60,38 +85,51 @@ struct ContentView: View {
                     Label("Save", systemImage: "square.and.arrow.down")
                 }
             }
-        
+            
+            #if os(macOS)
             ToolbarItemGroup(placement: .automatic) {
-                /// Language
-                Picker(selection: $language) {
-                    ForEach(CodeEditor.availableLanguages) { language in
-                        Text("\(language.rawValue.capitalized)")
-                            .tag(language)
-                    }
-                } label: {
-                    Label("Language", systemImage: "command")
+                tools
+            }
+            #elseif os(iOS)
+            ToolbarItem {
+                Toggle(isOn: $toggleTools) {
+                    Label("Tools", systemImage: "text.and.command.macwindow")
                 }
-                
-                /// Theme
-                Picker(selection: $theme) {
-                    ForEach(CodeEditor.availableThemes, id: \.self) { theme in
-                        Text("\(theme.rawValue)")
-                            .tag(theme)
-                    }
-                } label: {
-                    Label("Theme", systemImage: "paintbrush.fill")
+            }
+            #endif
+        }
+    }
+    
+    var tools: some View {
+        Group {
+            /// Language
+            Picker(selection: $language) {
+                ForEach(CodeEditor.availableLanguages) { language in
+                    Text("\(language.rawValue.capitalized)")
+                        .tag(language)
                 }
-                
-                /// Window Controller
-                Picker(selection: $windowController) {
-                    ForEach(WindowController.allCases) { item in
-                        Text(item.name)
-                            .tag(item)
-                    }
-                } label: {
-                    Label("Window Controls", systemImage: "macwindow")
-                        .labelStyle(.iconOnly)
+            } label: {
+                Label("Language", systemImage: "command")
+            }
+            
+            /// Theme
+            Picker(selection: $theme) {
+                ForEach(CodeEditor.availableThemes, id: \.self) { theme in
+                    Text("\(theme.rawValue)")
+                        .tag(theme)
                 }
+            } label: {
+                Label("Theme", systemImage: "paintbrush.fill")
+            }
+            
+            /// Window Controller
+            Picker(selection: $windowController) {
+                ForEach(WindowController.allCases) { item in
+                    Text(item.name)
+                        .tag(item)
+                }
+            } label: {
+                Label("Window Style", systemImage: "macwindow")
             }
         }
     }
@@ -127,23 +165,14 @@ extension ContentView {
                             DragGesture()
                                 .onChanged { value in
                                     DispatchQueue.main.async {
-                                        #if os(iOS)
-                                        if horizontalSizeClass == .compact {
-                                            height = height + value.translation.height
-                                        } else {
-                                            width = width + value.translation.width
-                                            height = height + value.translation.height
-                                        }
-                                        #elseif os(macOS)
                                         width = width + value.translation.width
                                         height = height + value.translation.height
-                                        #endif
                                     }
                                 }
                                 .onEnded { value in
                                     DispatchQueue.main.async {
-                                        width = min(width, proxy.size.width)
-                                        height = min(height, proxy.size.height)
+                                        width  = max(250, min(width, proxy.size.width))
+                                        height = max(250, min(height, proxy.size.height))
                                     }
                                 }
                         )
