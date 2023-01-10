@@ -15,6 +15,12 @@ Are you familiar with [carbon.now.sh](https://carbon.now.sh)? This application i
 <img src="Preview/preview_ios_2.png" height="600"/>
 <img src="Preview/preview_mac.png" height="500"/>
 
+### Donation ✌🏻
+
+<a href="https://www.buymeacoffee.com/shalchian" target="_blank">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="48" width="173">
+</a>
+
 ### License 📝
 
 Licensed under the [GNU GENERAL PUBLIC LICENSE Version 3](./LICENSE.md).
