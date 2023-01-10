@@ -54,6 +54,56 @@ struct FileThumbnail {
             return "go"
         case .gradle:
             return "gradle"
+        case .graphql:
+            return "graphql"
+        case .haskell:
+            return "haskell"
+        case .java:
+            return "java"
+        case .javascript:
+            return "javascript"
+        case .json:
+            return "json"
+        case .julia:
+            return "julia"
+        case .kotlin:
+            return "kotlin"
+        case .latex:
+            return "latex"
+        case .less:
+            return "less"
+        case .lua:
+            return "lua"
+        case .markdown:
+            return "markdown"
+        case .matlab:
+            return "matlab"
+        case .objectiveC:
+            return "xcode"
+        case .perl:
+            return "perl"
+        case .pgsql:
+            return "postgresql"
+        case .php, .phpTemplate:
+            return "php"
+        case .powershell:
+            return "powershell"
+        case .python, .pythonRepl:
+            return "python"
+        case .qml:
+            return "qt"
+        case .ruby:
+            return "ruby"
+        case .rust:
+            return "rust"
+        case .scala:
+            return "scala"
+        case .scss:
+            return "sass"
+        case .shell:
+            return "shell"
+        case .typescript:
+            return "typescript"
         case .swift:
             return "swift"
         default:
@@ -78,7 +128,34 @@ struct FileThumbnail {
              .elm,
              .fortran,
              .go,
-             .gradle:
+             .gradle,
+             .graphql,
+             .haskell,
+             .java,
+             .javascript,
+             .json,
+             .julia,
+             .kotlin,
+             .latex,
+             .less,
+             .lua,
+             .markdown,
+             .matlab,
+             .objectiveC,
+             .perl,
+             .pgsql,
+             .php,
+             .phpTemplate,
+             .powershell,
+             .python,
+             .pythonRepl,
+             .qml,
+             .ruby,
+             .rust,
+             .scala,
+             .scss,
+             .shell,
+             .typescript:
             return .custom
         default:
             return .system
@@ -117,6 +194,56 @@ struct FileThumbnail {
             return Color(hex: "00ADD8")
         case .gradle:
             return Color(hex: "02303A")
+        case .graphql:
+            return Color(hex: "E10098")
+        case .haskell:
+            return Color(hex: "5D4F85")
+        case .java:
+            return .red
+        case .javascript:
+            return Color(hex: "F7DF1E")
+        case .json:
+            return Color(hex: "000000")
+        case .julia:
+            return Color(hex: "9558B2")
+        case .kotlin:
+            return Color(hex: "7F52FF")
+        case .latex:
+            return Color(hex: "008080")
+        case .less:
+            return Color(hex: "1D365D")
+        case .lua:
+            return Color(hex: "2C2D72")
+        case .markdown:
+            return Color(hex: "000000")
+        case .matlab:
+            return .blue
+        case .objectiveC:
+            return Color(hex: "147EFB")
+        case .perl:
+            return Color(hex: "39457E")
+        case .pgsql:
+            return Color(hex: "4169E1")
+        case .php, .phpTemplate:
+            return Color(hex: "777BB4")
+        case .powershell:
+            return Color(hex: "5391FE")
+        case .python, .pythonRepl:
+            return Color(hex: "3776AB")
+        case .qml:
+            return Color(hex: "41CD52")
+        case .ruby:
+            return Color(hex: "CC342D")
+        case .rust:
+            return .red
+        case .scala:
+            return Color(hex: "DC322F")
+        case .scss:
+            return Color(hex: "CC6699")
+        case .shell:
+            return Color(hex: "FFD500")
+        case .typescript:
+            return Color(hex: "3178C6")
         case .swift:
             return .orange
         default:
