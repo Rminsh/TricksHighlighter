@@ -15,12 +15,7 @@ struct ContentView: View {
     @State var theme: CodeEditor.ThemeName = .ocean
     
     @State var windowController: WindowController = .mac
-    @State var thumbnail: WindowThumbnailPreviewer = WindowThumbnailPreviewer(
-        title: "Hello.swift",
-        titleColor: .white.opacity(0.8),
-        icon: "swift",
-        iconColor: .orange
-    )
+    @State var windowTitle: String = "Hello"
     
     @State private var toggleTools: Bool = true
     
@@ -141,8 +136,9 @@ extension ContentView {
             ZStack {
                 CodeWindowView(
                     theme: $theme,
-                    controller: $windowController,
-                    thumbnail: $thumbnail
+                    controller: windowController,
+                    language: language,
+                    windowTitle: $windowTitle
                 ){
                     CodeEditor(
                         source: $source,
@@ -203,8 +199,9 @@ extension ContentView {
         
         let view = CodeWindowView(
             theme: $theme,
-            controller: $windowController,
-            thumbnail: $thumbnail
+            controller: windowController,
+            language: language,
+            windowTitle: $windowTitle
         ){
             Text(AttributedString(highlightedCode ?? NSAttributedString(string: "")))
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

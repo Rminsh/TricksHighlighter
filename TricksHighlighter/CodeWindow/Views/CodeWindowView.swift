@@ -8,19 +8,13 @@
 import SwiftUI
 import Highlighter
 
-struct WindowThumbnailPreviewer {
-    var title: String
-    var titleColor: Color
-    var icon: String
-    var iconColor: Color
-}
-
 struct CodeWindowView<Content: View>: View {
     
     @Binding var theme: CodeEditor.ThemeName
-    @Binding var controller: WindowController
     
-    @Binding var thumbnail: WindowThumbnailPreviewer
+    var controller: WindowController
+    var language: CodeEditor.Language
+    @Binding var windowTitle: String
     
     let content: () -> Content
     
@@ -40,18 +34,12 @@ struct CodeWindowView<Content: View>: View {
                 switch controller {
                 case .mac:
                     MacController()
-                    FileThumbnail(
-                        thumbnail: $thumbnail,
-                        theme: $theme
-                    )
+                    fileThumbnail
                     .padding(.horizontal)
                     Spacer()
                 case .macStroke:
                     MacController(shape: "circle")
-                    FileThumbnail(
-                        thumbnail: $thumbnail,
-                        theme: $theme
-                    )
+                    fileThumbnail
                     .padding(.horizontal)
                     Spacer()
                 case .macHexagon:
@@ -59,24 +47,15 @@ struct CodeWindowView<Content: View>: View {
                         shape: "hexagon.fill",
                         rotation: 29
                     )
-                    FileThumbnail(
-                        thumbnail: $thumbnail,
-                        theme: $theme
-                    )
+                    fileThumbnail
                     .padding(.horizontal)
                     Spacer()
                 case .msWindows:
-                    FileThumbnail(
-                        thumbnail: $thumbnail,
-                        theme: $theme
-                    )
+                    fileThumbnail
                     Spacer()
                     MSWindowsController(foregroundColor: .gray)
                 case .kde:
-                    FileThumbnail(
-                        thumbnail: $thumbnail,
-                        theme: $theme
-                    )
+                    fileThumbnail
                     Spacer()
                     KdeController(foregroundColor: .gray)
                 }
@@ -93,6 +72,14 @@ struct CodeWindowView<Content: View>: View {
         .shadow(color: .gray,radius: 0.5)
         .padding(.all, 8)
     }
+    
+    var fileThumbnail: some View {
+        FileThumbnailView(
+            title: $windowTitle,
+            language: language,
+            theme: theme
+        )
+    }
 }
 
 
@@ -100,13 +87,9 @@ struct CodeWindowView_Previews: PreviewProvider {
     static var previews: some View {
         CodeWindowView(
             theme: .constant(CodeEditor.ThemeName(rawValue: "xcode")),
-            controller: .constant(.mac),
-            thumbnail: .constant(WindowThumbnailPreviewer(
-                title: "Hello.swift",
-                titleColor: .white.opacity(0.8),
-                icon: "swift",
-                iconColor: .orange
-            ))
+            controller: .mac,
+            language: .swift,
+            windowTitle: .constant("Hello .swift")
         ) {
             CodeEditor(
                 source: .constant("var name: String = \"Hello world\"\nlet opacity: float = 0.16\nprint(name + String(opacity))"),
