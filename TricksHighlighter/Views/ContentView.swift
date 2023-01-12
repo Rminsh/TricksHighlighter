@@ -19,12 +19,33 @@ struct ContentView: View {
     
     @State private var toggleTools: Bool = true
     
-    @State private var width: CGFloat = .zero
+    @State private var width: CGFloat = 450
     @State private var height: CGFloat = 400
     
     #if os(iOS)
+    let maxWidth: CGFloat = UIScreen.main.bounds.size.width
+    let maxHeight: CGFloat = UIScreen.main.bounds.size.height
+    
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
+    
+    private var resizeGesture: some Gesture {
+        DragGesture()
+            .onChanged { value in
+                DispatchQueue.main.async {
+                    width = max(250, width + value.translation.width)
+                    height = max(250, height + value.translation.height)
+                }
+            }
+            .onEnded { value in
+                DispatchQueue.main.async {
+                    #if os(iOS)
+                    width  = min(width, maxWidth)
+                    height = min(height, maxHeight)
+                    #endif
+                }
+            }
+    }
     
     var body: some View {
         #if os(iOS)
@@ -51,8 +72,20 @@ struct ContentView: View {
     }
     
     var content: some View {
-        ZStack(alignment: .bottom) {
+        ZStack {
             codeWindow
+                #if os(iOS)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                #elseif os(macOS)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                #endif
+                .task {
+                    #if os(iOS)
+                    if horizontalSizeClass == .compact {
+                        width = maxWidth
+                    }
+                    #endif
+                }
             
             #if os(iOS)
             if toggleTools {
@@ -132,64 +165,40 @@ struct ContentView: View {
 
 extension ContentView {
     var codeWindow: some View {
-        GeometryReader { proxy in
-            ZStack {
-                CodeWindowView(
-                    theme: $theme,
-                    controller: windowController,
-                    language: language,
-                    windowTitle: $windowTitle
-                ){
-                    CodeEditor(
-                        source: $source,
-                        language: language,
-                        theme: theme,
-                        fontSize: .constant(CGFloat(14.1))
-                    )
-                    .padding(.bottom)
-                }
-                .overlay(alignment: .bottomTrailing) {
-                    RoundedRectangle(cornerRadius: 10)
-                        .trim(from: 0.05, to: 0.20)
-                        .stroke(lineWidth: 4)
-                        .foregroundColor(.gray)
-                        .shadow(radius: 5)
-                        .frame(width: 50, height: 50)
-                        .padding(.all, 13)
-                        .background(Color.white.opacity(0.001))
-                        .gesture(
-                            DragGesture()
-                                .onChanged { value in
-                                    DispatchQueue.main.async {
-                                        width = width + value.translation.width
-                                        height = height + value.translation.height
-                                    }
-                                }
-                                .onEnded { value in
-                                    DispatchQueue.main.async {
-                                        width  = max(250, min(width, proxy.size.width))
-                                        height = max(250, min(height, proxy.size.height))
-                                    }
-                                }
-                        )
-                }
-                .frame(
-                    width: max(250, width),
-                    height: max(250, height),
-                    alignment: .center
-                )
-            }
-            .frame(maxWidth: .infinity)
-            .task {
-                width = 450
-                #if os(iOS)
-                if horizontalSizeClass == .compact {
-                    width = proxy.size.width
-                }
-                #endif
-            }
+        CodeWindowView(
+            theme: $theme,
+            controller: windowController,
+            language: language,
+            windowTitle: $windowTitle
+        ){
+            CodeEditor(
+                source: $source,
+                language: language,
+                theme: theme,
+                fontSize: .constant(CGFloat(14.1))
+            )
+            .padding(.bottom)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .overlay(alignment: .bottomTrailing) {
+            RoundedRectangle(cornerRadius: 10)
+                .trim(from: 0.05, to: 0.20)
+                .stroke(lineWidth: 4)
+                .foregroundColor(.gray)
+                .shadow(radius: 5)
+                .frame(width: 50, height: 50)
+                .padding(.all, 13)
+                .background(Color.white.opacity(0.001))
+                .gesture(
+                    resizeGesture
+                )
+        }
+        .frame(
+            minWidth: 250,
+            maxWidth: width,
+            minHeight: 250,
+            maxHeight: height,
+            alignment: .center
+        )
     }
     
     func codeWindowPreview() -> any View {
