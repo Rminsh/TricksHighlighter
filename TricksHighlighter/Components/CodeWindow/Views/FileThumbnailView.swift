@@ -11,8 +11,10 @@ import Highlighter
 struct FileThumbnailView: View {
     
     @Binding var title: String
+    
     var language: CodeEditor.Language
     var theme: CodeEditor.ThemeName
+    var isStatic: Bool = false
     
     var backgroundColor: RPColor {
         let highlighter = Highlightr()
@@ -37,12 +39,19 @@ struct FileThumbnailView: View {
                     .foregroundColor(iconThumbnail.color)
             }
             
-            TextField("", text: $title)
-                .foregroundColor(backgroundColor.isLight() ? .black : .white)
-                .fixedSize()
-                .autocorrectionDisabled()
-                .textFieldStyle(.plain)
-                .border(.clear)
+            if isStatic {
+                Text(title)
+                    .foregroundColor(backgroundColor.isLight() ? .black : .white)
+                    .fixedSize()
+            } else {
+                TextField("", text: $title)
+                    .foregroundColor(backgroundColor.isLight() ? .black : .white)
+                    .lineLimit(1)
+                    .fixedSize()
+                    .autocorrectionDisabled()
+                    .textFieldStyle(.plain)
+                    .border(.clear)
+            }
         }
         .font(.caption)
         .padding(.horizontal)

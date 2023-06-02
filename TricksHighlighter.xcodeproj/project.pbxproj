@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		C603DD552875602500AE3359 /* FileThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C603DD542875602500AE3359 /* FileThumbnailView.swift */; };
 		C6047D89289666C100F7E5DB /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6047D88289666C100F7E5DB /* FileHelper.swift */; };
-		C6047D8C2896711000F7E5DB /* SnapshotCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6047D8B2896711000F7E5DB /* SnapshotCreator.swift */; };
 		C6270CA8287B424E0017301E /* KdeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6270CA7287B424E0017301E /* KdeController.swift */; };
 		C62B1E75287491320082D23D /* TricksHighlighterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B1E74287491320082D23D /* TricksHighlighterApp.swift */; };
 		C62B1E77287491320082D23D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B1E76287491320082D23D /* ContentView.swift */; };
@@ -22,13 +21,11 @@
 		C6959FC4296D77BA0097AFA4 /* FileThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6959FC3296D77BA0097AFA4 /* FileThumbnail.swift */; };
 		C6959FCA296D78FB0097AFA4 /* LanguageThumbnail.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6959FC9296D78FB0097AFA4 /* LanguageThumbnail.xcassets */; };
 		C6CEBDA3296DE1F50085937B /* Highlighter in Frameworks */ = {isa = PBXBuildFile; productRef = C6CEBDA2296DE1F50085937B /* Highlighter */; };
-		C6EA054F296CA59000FC9568 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EA054E296CA59000FC9568 /* BottomSheetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C603DD542875602500AE3359 /* FileThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileThumbnailView.swift; sourceTree = "<group>"; };
 		C6047D88289666C100F7E5DB /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
-		C6047D8B2896711000F7E5DB /* SnapshotCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotCreator.swift; sourceTree = "<group>"; };
 		C6270CA7287B424E0017301E /* KdeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KdeController.swift; sourceTree = "<group>"; };
 		C62B1E71287491320082D23D /* TricksHighlighter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TricksHighlighter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C62B1E74287491320082D23D /* TricksHighlighterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksHighlighterApp.swift; sourceTree = "<group>"; };
@@ -42,7 +39,6 @@
 		C6681FF3296ABAF2007D3998 /* VisualEffectBlur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectBlur.swift; sourceTree = "<group>"; };
 		C6959FC3296D77BA0097AFA4 /* FileThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileThumbnail.swift; sourceTree = "<group>"; };
 		C6959FC9296D78FB0097AFA4 /* LanguageThumbnail.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LanguageThumbnail.xcassets; sourceTree = "<group>"; };
-		C6EA054E296CA59000FC9568 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,9 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				C6959FC2296D77AC0097AFA4 /* CodeWindow */,
-				C6EA054E296CA59000FC9568 /* BottomSheetView.swift */,
 				C6047D88289666C100F7E5DB /* FileHelper.swift */,
-				C6047D8B2896711000F7E5DB /* SnapshotCreator.swift */,
 				C6681FF3296ABAF2007D3998 /* VisualEffectBlur.swift */,
 			);
 			path = Components;
@@ -249,13 +243,11 @@
 				C6681FF4296ABAF2007D3998 /* VisualEffectBlur.swift in Sources */,
 				C6047D89289666C100F7E5DB /* FileHelper.swift in Sources */,
 				C603DD552875602500AE3359 /* FileThumbnailView.swift in Sources */,
-				C6EA054F296CA59000FC9568 /* BottomSheetView.swift in Sources */,
 				C62B1E8428749D690082D23D /* CodeWindowView.swift in Sources */,
 				C62B1E892874AECD0082D23D /* MSWindowsController.swift in Sources */,
 				C62B1E75287491320082D23D /* TricksHighlighterApp.swift in Sources */,
 				C6959FC4296D77BA0097AFA4 /* FileThumbnail.swift in Sources */,
 				C6270CA8287B424E0017301E /* KdeController.swift in Sources */,
-				C6047D8C2896711000F7E5DB /* SnapshotCreator.swift in Sources */,
 				C62B1E872874AEA00082D23D /* MacController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,6 +373,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TricksHighlighter/Resources/TricksHighlighter.entitlements;
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
@@ -394,10 +387,10 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.highlighter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -418,6 +411,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TricksHighlighter/Resources/TricksHighlighter.entitlements;
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
@@ -431,10 +425,10 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.highlighter;
 				PRODUCT_NAME = "$(TARGET_NAME)";

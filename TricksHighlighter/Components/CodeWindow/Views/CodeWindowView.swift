@@ -14,6 +14,7 @@ struct CodeWindowView<Content: View>: View {
     
     var controller: WindowController
     var language: CodeEditor.Language
+    var isStatic: Bool = false
     @Binding var windowTitle: String
     
     let content: () -> Content
@@ -68,8 +69,6 @@ struct CodeWindowView<Content: View>: View {
         }
         .background(backgroundColor)
         .mask(RoundedRectangle(cornerRadius: 12, style: .continuous))
-        .shadow(color: backgroundColor.opacity(0.8), radius: 5)
-        .shadow(color: .gray,radius: 0.5)
         .padding(.all, 8)
     }
     
@@ -77,7 +76,8 @@ struct CodeWindowView<Content: View>: View {
         FileThumbnailView(
             title: $windowTitle,
             language: language,
-            theme: theme
+            theme: theme,
+            isStatic: isStatic
         )
     }
 }

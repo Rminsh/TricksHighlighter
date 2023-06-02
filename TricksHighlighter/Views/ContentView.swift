@@ -17,10 +17,24 @@ struct ContentView: View {
     @State var windowController: WindowController = .mac
     @State var windowTitle: String = "Hello"
     
-    @State private var toggleTools: Bool = true
+    @State private var rawWidth: CGFloat = 450
+    @State private var rawHeight: CGFloat = 400
     
-    @State private var width: CGFloat = 450
-    @State private var height: CGFloat = 400
+    private var width: CGFloat {
+        #if os(iOS)
+        min(max(250, rawWidth), maxWidth)
+        #elseif os(macOS)
+        max(250, rawWidth)
+        #endif
+    }
+    
+    private var height: CGFloat {
+        #if os(iOS)
+        min(max(250, rawHeight), maxHeight)
+        #elseif os(macOS)
+        max(250, rawHeight)
+        #endif
+    }
     
     #if os(iOS)
     let maxWidth: CGFloat = UIScreen.main.bounds.size.width
@@ -32,48 +46,31 @@ struct ContentView: View {
     private var resizeGesture: some Gesture {
         DragGesture()
             .onChanged { value in
-                DispatchQueue.main.async {
-                    width = max(250, width + value.translation.width)
-                    height = max(250, height + value.translation.height)
-                }
-            }
-            .onEnded { value in
-                DispatchQueue.main.async {
-                    #if os(iOS)
-                    width  = min(width, maxWidth)
-                    height = min(height, maxHeight)
-                    #endif
-                }
+                let translation = value.translation
+                rawWidth = rawWidth + translation.width
+                rawHeight = rawHeight + translation.height
             }
     }
     
     var body: some View {
-        #if os(iOS)
-        NavigationView {
+        NavigationStack {
             ZStack {
-                Color("BackgroundColor")
+                /// Background
+                #if os(macOS)
+                VisualEffectBlur(
+                    material: .popover,
+                    blendingMode: .behindWindow
+                )
+                .edgesIgnoringSafeArea(.all)
+                #elseif os(iOS)
+                Color(UIColor.systemGroupedBackground)
                     .edgesIgnoringSafeArea(.all)
+                #endif
                 
-                content
-            }
-        }
-        #elseif os(macOS)
-        ZStack {
-            /// Background
-            VisualEffectBlur(
-                material: .popover,
-                blendingMode: .behindWindow
-            )
-            .edgesIgnoringSafeArea(.all)
-            
-            content
-        }
-        #endif
-    }
-    
-    var content: some View {
-        ZStack {
-            codeWindow
+                /// Code editor
+                ZStack {
+                    codeWindow
+                }
                 #if os(iOS)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 #elseif os(macOS)
@@ -82,82 +79,29 @@ struct ContentView: View {
                 .task {
                     #if os(iOS)
                     if horizontalSizeClass == .compact {
-                        width = maxWidth
+                        rawWidth = maxWidth
                     }
                     #endif
                 }
-            
-            #if os(iOS)
-            if toggleTools {
-                BottomSheetView(
-                    isOpen: $toggleTools,
-                    maxHeight: 300
-                ) {
-                    Form {
-                        Section(header: Text("Code window config")) {
-                            tools
+                .safeAreaInset(edge: .bottom) {
+                    /// Customization tools
+                    tools
+                        .scrollContentBackground(.hidden)
+                        .formStyle(.grouped)
+                        .frame(height: 250)
+                }
+                .toolbar {
+                    /// Save button
+                    ToolbarItem(placement: .primaryAction) {
+                        Button(action: {
+                            Task {
+                                saveCodeSnapshot()
+                            }
+                        }) {
+                            Label("Save", systemImage: "square.and.arrow.down")
                         }
                     }
                 }
-                .transition(.move(edge: .bottom))
-                .animation(.easeIn, value: toggleTools)
-            }
-            #endif
-        }
-        .edgesIgnoringSafeArea(.bottom)
-        .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                Button(action: {
-                    saveCodeSnapshot()
-                }) {
-                    Label("Save", systemImage: "square.and.arrow.down")
-                }
-            }
-            
-            #if os(macOS)
-            ToolbarItemGroup(placement: .automatic) {
-                tools
-            }
-            #elseif os(iOS)
-            ToolbarItem {
-                Toggle(isOn: $toggleTools) {
-                    Label("Tools", systemImage: "text.and.command.macwindow")
-                }
-            }
-            #endif
-        }
-    }
-    
-    var tools: some View {
-        Group {
-            /// Language
-            Picker(selection: $language) {
-                ForEach(CodeEditor.availableLanguages) { language in
-                    Text("\(language.rawValue.capitalized)")
-                        .tag(language)
-                }
-            } label: {
-                Label("Language", systemImage: "command")
-            }
-            
-            /// Theme
-            Picker(selection: $theme) {
-                ForEach(CodeEditor.availableThemes, id: \.self) { theme in
-                    Text("\(theme.rawValue)")
-                        .tag(theme)
-                }
-            } label: {
-                Label("Theme", systemImage: "paintbrush.fill")
-            }
-            
-            /// Window Controller
-            Picker(selection: $windowController) {
-                ForEach(WindowController.allCases) { item in
-                    Text(item.name)
-                        .tag(item)
-                }
-            } label: {
-                Label("Window Style", systemImage: "macwindow")
             }
         }
     }
@@ -201,7 +145,41 @@ extension ContentView {
         )
     }
     
-    func codeWindowPreview() -> any View {
+    var tools: some View {
+        Form {
+            /// Language
+            Picker(selection: $language) {
+                ForEach(CodeEditor.availableLanguages) { language in
+                    Text("\(language.rawValue.capitalized)")
+                        .tag(language)
+                }
+            } label: {
+                Label("Language", systemImage: "command")
+            }
+            
+            /// Theme
+            Picker(selection: $theme) {
+                ForEach(CodeEditor.availableThemes, id: \.self) { theme in
+                    Text("\(theme.rawValue)")
+                        .tag(theme)
+                }
+            } label: {
+                Label("Theme", systemImage: "paintbrush.fill")
+            }
+            
+            /// Window Controller
+            Picker(selection: $windowController) {
+                ForEach(WindowController.allCases) { item in
+                    Text(item.name)
+                        .tag(item)
+                }
+            } label: {
+                Label("Window Style", systemImage: "macwindow")
+            }
+        }
+    }
+    
+    func createCodeWindowPreview() -> some View {
         let highlightr = Highlightr()
         highlightr?.setTheme(to: theme.rawValue)
         let highlightedCode = highlightr?.highlight(source, as: language.rawValue)
@@ -210,6 +188,7 @@ extension ContentView {
             theme: $theme,
             controller: windowController,
             language: language,
+            isStatic: true,
             windowTitle: $windowTitle
         ){
             Text(AttributedString(highlightedCode ?? NSAttributedString(string: "")))
@@ -218,23 +197,26 @@ extension ContentView {
         }
         .edgesIgnoringSafeArea(.all)
         .frame(width: width, height: height, alignment: .center)
-        #if os(iOS)
-        .padding(.bottom, 24)
-        #endif
 
         return view
     }
 }
     
 extension ContentView {
+    @MainActor
     func saveCodeSnapshot() {
+        let view = createCodeWindowPreview()
+        let renderer = ImageRenderer(content: view)
+        renderer.scale = 2
         #if os(iOS)
-        let image = codeWindowPreview().snapshot()
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        if let snapshot = renderer.uiImage {
+            UIImageWriteToSavedPhotosAlbum(snapshot, nil, nil, nil)
+        }
         #elseif os(macOS)
-        if let url = FileHelper.shared.showSavePanel() {
+        if let url = FileHelper.shared.showSavePanel(),
+           let snapshot = renderer.nsImage{
             FileHelper.shared.savePNG(
-                image: codeWindowPreview().snapshot(),
+                image: snapshot,
                 path: url
             )
         }
