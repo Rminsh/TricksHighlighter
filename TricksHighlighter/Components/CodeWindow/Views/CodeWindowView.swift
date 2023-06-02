@@ -86,7 +86,7 @@ struct CodeWindowView<Content: View>: View {
 struct CodeWindowView_Previews: PreviewProvider {
     static var previews: some View {
         CodeWindowView(
-            theme: .constant(CodeEditor.ThemeName(rawValue: "xcode")),
+            theme: .constant(CodeEditor.ThemeName(rawValue: "materia")),
             controller: .mac,
             language: .swift,
             windowTitle: .constant("Hello .swift")
@@ -94,7 +94,7 @@ struct CodeWindowView_Previews: PreviewProvider {
             CodeEditor(
                 source: .constant("var name: String = \"Hello world\"\nlet opacity: float = 0.16\nprint(name + String(opacity))"),
                 language: .swift,
-                theme: CodeEditor.ThemeName(rawValue: "xcode"),
+                theme: CodeEditor.ThemeName(rawValue: "materia"),
                 fontSize: .constant(CGFloat(16))
             )
             .padding([.horizontal, .bottom])

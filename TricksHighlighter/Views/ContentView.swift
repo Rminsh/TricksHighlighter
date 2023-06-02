@@ -56,50 +56,42 @@ struct ContentView: View {
         NavigationStack {
             ZStack {
                 /// Background
-                #if os(macOS)
-                VisualEffectBlur(
-                    material: .popover,
-                    blendingMode: .behindWindow
-                )
-                .edgesIgnoringSafeArea(.all)
-                #elseif os(iOS)
-                Color(UIColor.systemGroupedBackground)
-                    .edgesIgnoringSafeArea(.all)
-                #endif
+                background
                 
-                /// Code editor
-                ZStack {
-                    codeWindow
-                }
-                #if os(iOS)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                #elseif os(macOS)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                #endif
-                .task {
-                    #if os(iOS)
-                    if horizontalSizeClass == .compact {
-                        rawWidth = maxWidth
+                VStack {
+                    ZStack {
+                        codeWindow
                     }
+                    #if os(iOS)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                    #elseif os(macOS)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     #endif
-                }
-                .safeAreaInset(edge: .bottom) {
+                    .task {
+                        #if os(iOS)
+                        if horizontalSizeClass == .compact {
+                            rawWidth = maxWidth
+                        }
+                        #endif
+                    }
+                    
                     /// Customization tools
                     tools
+                        .scrollDismissesKeyboard(.immediately)
                         .scrollContentBackground(.hidden)
                         .formStyle(.grouped)
-                        .frame(height: 250)
+                        .frame(height: 225)
                 }
-                .toolbar {
-                    /// Save button
-                    ToolbarItem(placement: .primaryAction) {
-                        Button(action: {
-                            Task {
-                                saveCodeSnapshot()
-                            }
-                        }) {
-                            Label("Save", systemImage: "square.and.arrow.down")
+            }
+            .toolbar {
+                /// Save button
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: {
+                        Task {
+                            saveCodeSnapshot()
                         }
+                    }) {
+                        Label("Save", systemImage: "square.and.arrow.down")
                     }
                 }
             }
@@ -177,6 +169,19 @@ extension ContentView {
                 Label("Window Style", systemImage: "macwindow")
             }
         }
+    }
+    
+    var background: some View {
+        #if os(macOS)
+        VisualEffectBlur(
+            material: .popover,
+            blendingMode: .behindWindow
+        )
+        .edgesIgnoringSafeArea(.all)
+        #elseif os(iOS)
+        Color(UIColor.systemGroupedBackground)
+            .edgesIgnoringSafeArea(.all)
+        #endif
     }
     
     func createCodeWindowPreview() -> some View {
