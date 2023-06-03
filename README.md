@@ -4,8 +4,8 @@
 </p>
 
 ![SwiftUI](https://img.shields.io/badge/SwiftUI-black?logo=swift)
-![Supported platforms](https://img.shields.io/badge/Platforms-iOS%2015.0+%20|%20macOS%2012.0-white?logo=apple)
-![Xcode version](https://img.shields.io/badge/Xcode%2013+-black?logo=xcode)
+![Supported platforms](https://img.shields.io/badge/Platforms-iOS%2016.0+%20|%20macOS%2013.0-white?logo=apple)
+![Xcode version](https://img.shields.io/badge/Xcode%2014+-black?logo=xcode)
 
 Are you familiar with [carbon.now.sh](https://carbon.now.sh)? This application is something similar, You can convert your code to a beautiful windowed image with highlighting feature. Also this application is using [Highlighter](https://github.com/Rminsh/highlighter) library as it's core. With the power of SwiftUI you can run the same code both on iOS and macOS.
 
