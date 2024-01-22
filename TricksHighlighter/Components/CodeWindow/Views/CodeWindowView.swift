@@ -22,10 +22,10 @@ struct CodeWindowView<Content: View>: View {
     var backgroundColor: Color {
         let highlighter = Highlightr()
         highlighter?.setTheme(to: theme.rawValue)
-        #if os(iOS)
-        return Color(uiColor: highlighter?.theme.themeBackgroundColor ?? .black)
-        #elseif os(macOS)
+        #if os(macOS)
         return Color(nsColor: highlighter?.theme.themeBackgroundColor ?? .black)
+        #else
+        return Color(uiColor: highlighter?.theme.themeBackgroundColor ?? .black)
         #endif
     }
     

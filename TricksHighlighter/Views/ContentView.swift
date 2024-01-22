@@ -21,22 +21,22 @@ struct ContentView: View {
     @State private var rawHeight: CGFloat = 400
     
     private var width: CGFloat {
-        #if os(iOS)
+        #if os(iOS) && !os(visionOS)
         min(max(250, rawWidth), maxWidth)
-        #elseif os(macOS)
+        #elseif os(macOS) || os(visionOS)
         max(250, rawWidth)
         #endif
     }
     
     private var height: CGFloat {
-        #if os(iOS)
+        #if os(iOS) && !os(visionOS)
         min(max(250, rawHeight), maxHeight)
-        #elseif os(macOS)
+        #elseif os(macOS) || os(visionOS)
         max(250, rawHeight)
         #endif
     }
     
-    #if os(iOS)
+    #if os(iOS) && !os(visionOS)
     let maxWidth: CGFloat = UIScreen.main.bounds.size.width
     let maxHeight: CGFloat = UIScreen.main.bounds.size.height
     
@@ -68,7 +68,7 @@ struct ContentView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     #endif
                     .task {
-                        #if os(iOS)
+                        #if os(iOS) && !os(visionOS)
                         if horizontalSizeClass == .compact {
                             rawWidth = maxWidth
                         }
@@ -77,7 +77,9 @@ struct ContentView: View {
                     
                     /// Customization tools
                     tools
+                        #if !os(visionOS)
                         .scrollDismissesKeyboard(.immediately)
+                        #endif
                         .scrollContentBackground(.hidden)
                         .formStyle(.grouped)
                         .frame(height: 225)
@@ -172,16 +174,18 @@ extension ContentView {
     }
     
     var background: some View {
-        #if os(macOS)
-        VisualEffectBlur(
-            material: .popover,
-            blendingMode: .behindWindow
-        )
-        .edgesIgnoringSafeArea(.all)
-        #elseif os(iOS)
-        Color(UIColor.systemGroupedBackground)
+        Group {
+            #if os(macOS)
+            VisualEffectBlur(
+                material: .popover,
+                blendingMode: .behindWindow
+            )
             .edgesIgnoringSafeArea(.all)
-        #endif
+            #elseif os(iOS)
+            Color(UIColor.systemGroupedBackground)
+                .edgesIgnoringSafeArea(.all)
+            #endif
+        }
     }
     
     func createCodeWindowPreview() -> some View {
