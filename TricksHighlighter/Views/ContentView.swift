@@ -12,7 +12,7 @@ struct ContentView: View {
     
     @State var source: String = "//Lets begin here"
     @State var language: CodeEditor.Language = .swift
-    @State var theme: CodeEditor.ThemeName = .ocean
+    @State var theme: CodeEditor.ThemeName = .atomOneDark
     
     @State var windowController: WindowController = .mac
     @State var windowTitle: String = "Hello"
